@@ -1,6 +1,6 @@
-## Titanic Survival
+# Titanic Survival
 
-#IMPORTING LIBRARIES
+# IMPORTING LIBRARIES
 
 
 # linear algebra
@@ -11,13 +11,13 @@ import numpy as np
 
 import pandas as pd
 
-#data visualization
+# data visualization
 
 import seaborn as sns
 from matplotlib import pyplot as plt
 from matplotlib import style
 
-#algorithms
+# algorithms
 
 from sklearn import linear_model
 from sklearn.linear_model import LogisticRegression
@@ -29,16 +29,16 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC, LinearSVC
 from sklearn.naive_bayes import GaussianNB
 
-#getting data
+# getting data
 
 test_df = pd.read_csv("test.csv")
 train_df = pd.read_csv("train.csv")
 
-#data exploration/analysis
+# data exploration/analysis
 
 train_df.info()
-#the training dataset has 891 examples and 11 features + 1 target variable (survived)
-#2 of the features are float 5 are integers and 5 are objects
+# the training dataset has 891 examples and 11 features + 1 target variable (survived)
+# 2 of the features are float 5 are integers and 5 are objects
 
 train_df.describe()
 # we can see that 38% out of the training-set survived the Titanic.
@@ -52,7 +52,7 @@ train_df.head()
 # roughly the same scale. We can also spot some more features, that contain missing values (NaN = not a number),
 # that we need to deal with.
 
-#let's take a more detailed look at what data are missing
+# let's take a more detailed look at what data are missing
 
 total = train_df.isnull().sum().sort_values(ascending=False)
 percent1 = train_df.isnull().sum()/train_df.isnull().count() * 100
@@ -60,13 +60,30 @@ percent = (round(percent1, 1)).sort_values(ascending=False)
 missing_data = pd.concat([total, percent], axis=1, keys=['Total', '%'])
 missing_data.head()
 
-#The Embarked feature has only 2 missing values, which can easily be filled. It will be much more tricky, to deal with
+# The Embarked feature has only 2 missing values, which can easily be filled. It will be much more tricky, to deal with
 # #the ‘Age’ feature, which has 177 missing values. The ‘Cabin’ feature needs further investigation, but it looks like
 # #that we might want to drop it from the dataset, since 77 % of it are missing.
 
 train_df.columns.values
 
+# it would make sense if everything except ‘PassengerId’, ‘Ticket’ and ‘Name’ would be correlated with a high
+# #survival rate.
 
+# 1. age and sex
+
+survived = 'survived'
+not_survived = 'not survived'
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
+women = train_df[train_df['Sex'] == 'female']
+men = train_df[train_df['Sex'] == 'male']
+ax = sns.distplot(women[women['Survived'] == 1].Age.dropna(), bins=18, label=survived, ax=axes[0], kde=False)
+ax = sns.distplot(women[women['Survived'] == 0].Age.dropna(), bins=40, label=not_survived, ax=axes[0], kde=False)
+ax.legend()
+ax.set_title('Female')
+ax = sns.distplot(men[men['Survived'] == 1].Age.dropna(), bins=18, label=survived, ax=axes[1], kde=False)
+ax = sns.distplot(men[men['Survived'] == 0].Age.dropna(), bins=40, label=not_survived, ax=axes[1], kde=False)
+ax.legend()
+_ = ax.set_title('Male')
 
 
 
