@@ -85,9 +85,46 @@ ax = sns.distplot(men[men['Survived'] == 0].Age.dropna(), bins=40, label=not_sur
 ax.legend()
 _ = ax.set_title('Male')
 
+# 2. embarked , sex , pclass
 
+FacetGrid = sns.FacetGrid(train_df, row='Embarked', height=4.5, aspect=1.6)
+FacetGrid.map(sns.pointplot, 'Pclass', 'Survived', 'Sex', palette=None,  order=None, hue_order=None )
+FacetGrid.add_legend()
+# Embarked seems to be correlated with survival, depending on the gender.
+# Women on port Q and on port S have a higher chance of survival. The inverse is true, if they are at port C.
+# Men have a high survival probability if they are on port C, but a low probability if they are on port Q or S.
+# Pclass also seems to be correlated with survival. We will generate another plot of it below.
 
+# 3. Pclass
 
+sns.barplot(x='Pclass', y='Survived', data=train_df)
+# Here we see clearly, that Pclass is contributing to a persons chance of survival, especially if this person is in
+# class 1. We will create another Pclass plot below.
+
+grid = sns.FacetGrid(train_df, col='Survived', row='Pclass', height=2.2, aspect=1.6)
+grid.map(plt.hist, 'Age', alpha=.5, bins=20)
+grid.add_legend();
+
+# The plot above confirms our assumption about pclass 1,
+# but we can also spot a high probability that a person in pclass 3 will not survive.
+
+# 4. SibSp and ParCh
+
+# SibSp and Parch would make more sense as a combined feature, that shows the total number of relatives,
+# a person has on the Titanic. I will create it below and also a feature that sows if someone is not alone.
+
+data = [train_df, test_df]
+for dataset in data:
+    dataset['relatives'] = dataset['SibSp'] + dataset['Parch']
+    dataset.loc[dataset['relatives'] > 0, 'not_alone'] = 0
+    dataset.loc[dataset['relatives'] == 0, 'not_alone'] = 1
+    dataset['not_alone'] = dataset['not_alone'].astype(int)
+train_df['not_alone'].value_counts()
+
+axes = sns.factorplot(x='relatives', y='Survived', data=train_df, aspect=2.5, )
+
+# Here we can see that you had a high probabilty of survival with 1 to 3 realitves, but a lower one if you had less
+# than 1 or more than 3 (except for some cases with 6 relatives).
 
 
 
