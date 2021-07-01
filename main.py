@@ -127,6 +127,37 @@ axes = sns.factorplot(x='relatives', y='Survived', data=train_df, aspect=2.5, )
 # than 1 or more than 3 (except for some cases with 6 relatives).
 
 
+# Data Processing
+
+# First, I will drop ‘PassengerId’ from the train set, because it does not contribute to a persons survival
+# probability. I will not drop it from the test set, since it is required there for the submission.
+
+train_df = train_df.drop(['PassengerId'], axis=1)
+
+# Missing Data:
+# we have to deal with Cabin (687), Embarked (2) and Age (177).
+
+# Cabin:
+# A cabin number looks like ‘C123’ and the letter refers to the deck. Therefore we’re going to extract these and create
+# a new feature, that contains a persons deck. Afterwords we will convert the feature into a numeric variable.
+# The missing values will be converted to zero.
+
+import re
+deck={"A":1,"B":2,"C":3,"D":4,"E":5,"F":6,"G":7,"U":8}
+data=[train_df,test_df]
+for dataset in data:
+    dataset['Cabin']=dataset['Cabin'].fillna("U0")
+    dataset['Deck']= dataset['Cabin'].map(lambda x: re.compile("([a-zA-z]+)").search(x).group())
+    dataset['Deck']= dataset['Deck'].map(deck)
+    dataset['Deck']= dataset['Deck'].fillna(0)
+    dataset['Deck']=dataset['Deck'].astype(int)
+
+#we can now drop the cabin feature
+
+train_df=train_df.drop(['Cabin'],axis=1)
+test_df=test_df.drop(['Cabin'],axis=1)
+
+
 
 
 
