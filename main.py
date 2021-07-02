@@ -203,6 +203,30 @@ for dataset in data:
     dataset['Fare']=dataset['Fare'].fillna(0)
     dataset['Fare']=dataset['Fare'].astype(int)
 
+# Name:
+# We will use the Name feature to extract the Titles from the Name, so that we can build a new feature out of that.
+
+data=[train_df,test_df]
+titles={'Mr':1,'Miss':2,'Mrs':3,'Master':4,'Rare':5}
+
+for dataset in data:
+    # extract titles
+    dataset['Title']=dataset.Name.str.extract(' ([A-Za-z]+)\.',expand=False)
+    # replace titiles as more common titles or as rare
+    dataset['Title']=dataset['Title'].replace(['Lady','Countess','Capt','Col','Don','Dr','Major',
+                                               'Rev','Sir','Jonkheer','Dona'],'Rare')
+    dataset['Title']=dataset['Title'].replace('Mlle','Miss')
+    dataset['Title']=dataset['Title'].replace('Ms','Miss')
+    dataset['Title']=dataset['Title'].replace('Mme','Miss')
+    # convert titles into  numbers
+    dataset['Title']=dataset['Title'].map(titles)
+    # filling Nan with 0 to be safe
+    dataset['Title']=dataset['Title'].fillna(0)
+
+train_df = train_df.drop(['Name'], axis=1)
+test_df = test_df.drop(['Name'], axis=1)
+
+
 
 
 
