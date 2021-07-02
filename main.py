@@ -226,6 +226,31 @@ for dataset in data:
 train_df = train_df.drop(['Name'], axis=1)
 test_df = test_df.drop(['Name'], axis=1)
 
+# Sex:
+# convert sex feature into numeric values
+
+genders={'male':0,'female':1}
+data=[train_df,test_df]
+
+for dataset in data:
+    dataset['Sex']=dataset['Sex'].map(genders)
+
+# Ticket:
+train_df['Ticket'].describe()
+
+# since ticket feature has 681 different values it will be difficult to convert it , so we will drop it
+
+train_df=train_df.drop(['Ticket'],axis=1)
+test_df=test_df.drop(['Ticket'],axis=1)
+
+# Embarked:
+
+ports={'S':0,'C':1,'Q':2}
+data=[train_df,test_df]
+
+for dataset in data:
+    dataset['Embarked']=dataset['Embarked'].map(ports)
+
 
 
 
