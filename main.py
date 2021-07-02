@@ -157,6 +157,44 @@ for dataset in data:
 train_df=train_df.drop(['Cabin'],axis=1)
 test_df=test_df.drop(['Cabin'],axis=1)
 
+# age
+# Now we can tackle the issue with the age features missing values. I will create an array that contains random numbers,
+# which are computed based on the mean age value in regards to the standard deviation and is_null.
+
+data = [train_df,test_df]
+for dataset in data:
+    mean=train_df['Age'].mean()
+    std=test_df['Age'].std()
+    is_null=dataset['Age'].isnull().sum()
+
+    # compute random numbers between mean , std, is_null
+    rand_age=np.random.randint(mean-std, mean+std, size=is_null)
+
+    # filling NaN values in age column with random values generated
+    age_slice= dataset['Age'].copy()
+    age_slice[np.isnan(age_slice)]=rand_age
+    dataset['Age']=age_slice
+    dataset['Age']=train_df['Age'].astype(int)
+
+train_df['Age'].isnull().sum()
+
+# embarked
+# since embarked feature has only 2 values missing, we will fill it with the common one
+
+train_df['Embarked'].describe()
+common_value='S'
+data=[train_df,test_df]
+for dataset in data:
+    dataset['Embarked']=dataset['Embarked'].fillna(common_value)
+
+# CONVERTING DATA
+
+train_df.info()
+
+
+
+
+
 
 
 
