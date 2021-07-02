@@ -191,6 +191,18 @@ for dataset in data:
 
 train_df.info()
 
+# ‘Fare’ is a float and we have to deal with 4 categorical features: Name, Sex, Ticket and Embarked. Lets investigate
+# and transform one after another.
+
+# fare:
+# converting fare from float to int using astype() in pandas
+
+data=[train_df,test_df]
+
+for dataset in data:
+    dataset['Fare']=dataset['Fare'].fillna(0)
+    dataset['Fare']=dataset['Fare'].astype(int)
+
 
 
 
