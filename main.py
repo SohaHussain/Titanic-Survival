@@ -369,6 +369,12 @@ svm.fit(x_train,y_train)
 y_pred=svm.predict(x_test)
 acc_svm=round(svm.score(x_train,y_train)*100,2)
 
+# Decision Tree:
+
+decision_tree=DecisionTreeClassifier()
+decision_tree.fit(x_train,y_train)
+y_pred=decision_tree.predict(x_test)
+acc_decision_tree=round(decision_tree.score(x_train,y_train)*100,2)
 
 
 
