@@ -301,7 +301,7 @@ for dataset in data:
 
 for dataset in data:
     dataset['Fare_per_person']=dataset['Fare']/(dataset['relatives']+1)
-    dataset['Fare_per_person'].astype(int)
+    dataset['Fare_per_person']=dataset['Fare_per_person'].astype(int)
 
 
 
