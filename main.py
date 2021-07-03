@@ -362,6 +362,13 @@ perceptron.fit(x_train,y_train)
 y_pred=perceptron.predict(x_test)
 acc_perc=round(perceptron.score(x_train,y_train)*100,2)
 
+# Linear Support Vector Machine (SVM):
+
+svm=LinearSVC()
+svm.fit(x_train,y_train)
+y_pred=svm.predict(x_test)
+acc_svm=round(svm.score(x_train,y_train)*100,2)
+
 
 
 
