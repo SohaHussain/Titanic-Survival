@@ -355,6 +355,15 @@ gaussian.fit(x_train,y_train)
 y_pred=gaussian.predict(x_test)
 acc_gaussian=round(gaussian.score(x_train,y_train)*100,2)
 
+# Perceptron:
+
+perceptron=Perceptron(max_iter=10)
+perceptron.fit(x_train,y_train)
+y_pred=perceptron.predict(x_test)
+acc_perc=round(perceptron.score(x_train,y_train)*100,2)
+
+
+
 
 
 
