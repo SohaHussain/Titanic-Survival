@@ -326,6 +326,15 @@ y_pred=sgd.predict(x_test)
 sgd.score(x_train,y_train)
 acc_sgd=round(sgd.score(x_train,y_train)*100,2)
 
+# Random Forest:
+
+random_forest=RandomForestClassifier(n_estimators=100)
+random_forest.fit(x_train,y_train)
+y_pred=random_forest.predict(x_test)
+random_forest.score(x_train,y_train)
+acc_random_forest=round(random_forest.score(x_train,y_train)*100,2)
+
+
 
 
 
