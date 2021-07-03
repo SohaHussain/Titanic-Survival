@@ -341,6 +341,15 @@ logreg.fit(x_train,y_train)
 y_pred=logreg.predict(x_test)
 acc_log=round(logreg.score(x_train,y_train)*100,2)
 
+# K Nearest Neighbour (KNN):
+
+knn=KNeighborsClassifier(n_neighbors=3)
+knn.fit(x_train,y_train)
+y_pred=knn.predict(x_test)
+acc_knn=round(knn.score(x_train,y_train)*100,2)
+
+
+
 
 
 
