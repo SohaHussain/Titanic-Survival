@@ -314,6 +314,20 @@ train_df.head(10)
 # provide labels for their testing-set, we need to use the predictions on the training set to compare the algorithms
 # with each other. Later on, we will use cross validation.
 
+x_train=train_df.drop("Survived",axis=1)
+y_train=train_df['Survived']
+x_test=test_df.drop('PassengerId',axis=1).copy()
+
+# Stochastic Gradient Descent (SGD):
+
+sgd=linear_model.SGDClassifier(max_iter=5,tol=None)
+sgd.fit(x_train,y_train)
+y_pred=sgd.predict(x_test)
+sgd.score(x_train,y_train)
+acc_sgd=round(sgd.score(x_train,y_train)*100,2)
+
+
+
 
 
 
