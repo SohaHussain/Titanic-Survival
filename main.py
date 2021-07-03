@@ -288,6 +288,17 @@ for dataset in data:
     dataset.loc[dataset['Fare'] > 250, 'Fare'] = 5
     dataset['Fare'] = dataset['Fare'].astype(int)
 
+# CREATING NEW FEATURES
+# I will add two new features to the dataset, that I compute out of other features.
+
+# 1. Age Time class
+
+data=[train_df,test_df]
+for dataset in data:
+    dataset['Age_Class']=dataset['Age']*dataset['Pclass']
+
+
+
 
 
 
