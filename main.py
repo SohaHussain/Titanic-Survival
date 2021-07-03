@@ -308,6 +308,14 @@ for dataset in data:
 train_df.head(10)
 
 
+# BUILDING MACHINE LEARNING MODELS
+
+# Now we will train several Machine Learning models and compare their results. Note that because the dataset does not
+# provide labels for their testing-set, we need to use the predictions on the training set to compare the algorithms
+# with each other. Later on, we will use cross validation.
+
+
+
 
 
 
