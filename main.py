@@ -303,6 +303,11 @@ for dataset in data:
     dataset['Fare_per_person']=dataset['Fare']/(dataset['relatives']+1)
     dataset['Fare_per_person']=dataset['Fare_per_person'].astype(int)
 
+# let's take a look at our training set before we start training models
+
+train_df.head(10)
+
+
 
 
 
