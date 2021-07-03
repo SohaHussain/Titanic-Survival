@@ -251,6 +251,26 @@ data=[train_df,test_df]
 for dataset in data:
     dataset['Embarked']=dataset['Embarked'].map(ports)
 
+# CREATING CATEGORIES
+
+# Age:
+# Now we need to convert the ‘age’ feature. First we will convert it from float into integer. Then we will create the
+# new ‘AgeGroup” variable, by categorizing every age into a group.
+
+data=[train_df,test_df]
+for dataset in data:
+    dataset['Age']=dataset['Age'].astype(int)
+    dataset.loc[dataset['Age']<=11,'Age']=0
+    dataset.loc[(dataset['Age'] > 11) & (dataset['Age'] <= 18), 'Age'] = 1
+    dataset.loc[(dataset['Age'] > 18) & (dataset['Age'] <= 22), 'Age'] = 2
+    dataset.loc[(dataset['Age'] > 22) & (dataset['Age'] <= 27), 'Age'] = 3
+    dataset.loc[(dataset['Age'] > 27) & (dataset['Age'] <= 33), 'Age'] = 4
+    dataset.loc[(dataset['Age'] > 33) & (dataset['Age'] <= 40), 'Age'] = 5
+    dataset.loc[(dataset['Age'] > 40) & (dataset['Age'] <= 66), 'Age'] = 6
+    dataset.loc[dataset['Age'] > 66, 'Age'] = 7
+train_df['Age'].value_counts()
+
+
 
 
 
