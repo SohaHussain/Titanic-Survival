@@ -348,6 +348,13 @@ knn.fit(x_train,y_train)
 y_pred=knn.predict(x_test)
 acc_knn=round(knn.score(x_train,y_train)*100,2)
 
+# Gaussian Naive Bayes (GNB):
+
+gaussian=GaussianNB()
+gaussian.fit(x_train,y_train)
+y_pred=gaussian.predict(x_test)
+acc_gaussian=round(gaussian.score(x_train,y_train)*100,2)
+
 
 
 
