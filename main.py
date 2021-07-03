@@ -297,6 +297,11 @@ data=[train_df,test_df]
 for dataset in data:
     dataset['Age_Class']=dataset['Age']*dataset['Pclass']
 
+# 2. Fare per person
+
+for dataset in data:
+    dataset['Fare_per_person']=dataset['Fare']/(dataset['relatives']+1)
+    dataset['Fare_per_person'].astype(int)
 
 
 
