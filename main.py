@@ -334,6 +334,13 @@ y_pred=random_forest.predict(x_test)
 random_forest.score(x_train,y_train)
 acc_random_forest=round(random_forest.score(x_train,y_train)*100,2)
 
+# Logistic Regression:
+
+logreg=LogisticRegression()
+logreg.fit(x_train,y_train)
+y_pred=logreg.predict(x_test)
+acc_log=round(logreg.score(x_train,y_train)*100,2)
+
 
 
 
