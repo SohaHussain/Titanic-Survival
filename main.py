@@ -376,7 +376,18 @@ decision_tree.fit(x_train,y_train)
 y_pred=decision_tree.predict(x_test)
 acc_decision_tree=round(decision_tree.score(x_train,y_train)*100,2)
 
+# Which Model Is The Best??
 
+results=pd.DataFrame({'model':['Support Vector Machine','KNN','Logistic Regression','Decision Tree',
+                               'Gaussian Naive Bayes','Perceptron','Random Forest','Stochastic Gradient Descent'],
+                      'score':[acc_svm,acc_knn,acc_log,acc_decision_tree,acc_gaussian,acc_perc,acc_random_forest,
+                               acc_sgd]})
+results=results.sort_values(by='score',ascending=False)
+results=results.set_index('score')
+results.head(9)
+
+# the Random Forest classifier goes on the first place. But first, let us check, how random-forest performs,
+# when we use cross validation.
 
 
 
