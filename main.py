@@ -389,6 +389,32 @@ results.head(9)
 # the Random Forest classifier goes on the first place. But first, let us check, how random-forest performs,
 # when we use cross validation.
 
+# K - Fold Cross Validation
+
+# K-Fold Cross Validation randomly splits the training data into K subsets called folds. Let’s image we would split our
+# data into 4 folds (K = 4). Our random forest model would be trained and evaluated 4 times, using a different fold for
+# evaluation everytime, while it would be trained on the remaining 3 folds.
+
+# The result of our K-Fold Cross Validation example would be an array that contains 4 different scores. We then need to
+# compute the mean and the standard deviation for these scores.
+
+# The code below perform K-Fold Cross Validation on our random forest model, using 10 folds (K = 10). Therefore it
+# outputs an array with 10 different scores.
+
+from sklearn.model_selection import cross_val_score
+rf = RandomForestClassifier(n_estimators=100)
+scores = cross_val_score(rf, x_train, y_train, cv=10, scoring = "accuracy")
+print("Scores:", scores)
+print("Mean:", scores.mean())
+print("Standard Deviation:", scores.std())
+
+# Our model has a average accuracy of 82% with a standard deviation of 4 %.
+# The standard deviation shows us, how precise the estimates are .
+# This means in our case that the accuracy of our model can differ + — 4%.
+# I think the accuracy is still really good and since random forest is an easy to use model, we will try to increase
+# it’s performance even further in the following section.
+
+
 
 
 
