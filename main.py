@@ -452,6 +452,16 @@ print(round(acc_random_forest,2),"%")
 
 print("oob score:", round(random_forest.oob_score_, 4)*100, "%")
 
+# hyperparameter tuning
+
+'''param_grid = { "criterion" : ["gini", "entropy"], "min_samples_leaf" : [1, 5, 10, 25, 50, 70],
+               "min_samples_split" : [2, 4, 10, 12, 16, 18, 25, 35], "n_estimators": [100, 400, 700, 1000, 1500]}
+from sklearn.model_selection import GridSearchCV, cross_val_score
+rf = RandomForestClassifier(n_estimators=100, max_features='auto', oob_score=True, random_state=1, n_jobs=-1)
+clf = GridSearchCV(estimator=rf, param_grid=param_grid, n_jobs=-1)
+clf.fit(x_train, y_train)
+clf.bestparams'''
+
 
 
 
