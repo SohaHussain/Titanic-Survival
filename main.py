@@ -414,7 +414,18 @@ print("Standard Deviation:", scores.std())
 # I think the accuracy is still really good and since random forest is an easy to use model, we will try to increase
 # it’s performance even further in the following section.
 
+# Feature Importance
 
+#  great quality of random forest is that they make it very easy to measure the relative importance of each feature.
+#  Sklearn measure a features importance by looking at how much the treee nodes, that use that feature, reduce impurity
+#  on average (across all trees in the forest). It computes this score automaticall for each feature after training and
+#  scales the results so that the sum of all importances is equal to 1.
+
+importances=pd.DataFrame({'feature':x_train.columns,'importance':np.round(random_forest.feature_importances_,3)})
+importances=importances.sort_values('importance',ascending=False).set_index('feature')
+importances.head(15)
+
+importances.plot.bar()
 
 
 
