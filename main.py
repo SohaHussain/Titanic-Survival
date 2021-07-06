@@ -427,6 +427,17 @@ importances.head(15)
 
 importances.plot.bar()
 
+#not_alone and Parch doesn’t play a significant role in our random forest classifiers prediction process. Because of
+# that I will drop them from the dataset and train the classifier again. We could also remove more or less features,
+# but this would need a more detailed investigation of the features effect on our model. But I think it’s just fine to
+# remove only Alone and Parch.
+
+train_df=train_df.drop('Parch',axis=1)
+test_df=test_df.drop('Parch',axis=1)
+train_df=train_df.drop('not_alone',axis=1)
+test_df=test_df.drop('not_alone',axis=1)
+
+
 
 
 
