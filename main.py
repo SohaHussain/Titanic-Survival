@@ -437,6 +437,21 @@ test_df=test_df.drop('Parch',axis=1)
 train_df=train_df.drop('not_alone',axis=1)
 test_df=test_df.drop('not_alone',axis=1)
 
+# training Random forest again
+
+random_forest=RandomForestClassifier(n_estimators=100,oob_score=True)
+random_forest.fit(x_train,y_train)
+y_pred=random_forest.predict(x_test)
+random_forest.score(x_train,y_train)
+acc_random_forest=round(random_forest.score(x_train,y_train)*100,2)
+print(round(acc_random_forest,2),"%")
+
+# Our random forest model predicts as good as it did before. A general rule is that, the more features you have, the more
+# likely your model will suffer from overfitting and vice versa. But I think our data looks fine for now and hasn't too
+# much features.
+
+print("oob score:", round(random_forest.oob_score_, 4)*100, "%")
+
 
 
 
